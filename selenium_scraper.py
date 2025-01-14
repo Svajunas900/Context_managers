@@ -1,9 +1,21 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Run in headless mode
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
+
+remote_url = "http://selenium_scraper:4444/wd/hub"
 
 
 def write_text_from_wiki(user_text, file_name):
-  driver = webdriver.Chrome()
+  driver = webdriver.Remote(
+    command_executor=remote_url,
+    options=chrome_options
+) 
   driver.get("https://www.wikipedia.org/")
   search_input = driver.find_element(by=By.XPATH, value='//*[@id="searchInput"]')
   search_input.send_keys(user_text)
