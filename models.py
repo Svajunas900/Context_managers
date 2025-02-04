@@ -14,6 +14,7 @@ class UserLogin(Base):
   time: Mapped[str] = mapped_column(String(30))
   username: Mapped[str] = mapped_column(String(30))
   password: Mapped[str] = mapped_column(String(150))
+  disabled: Mapped[bool] = mapped_column(Boolean())
 
 
 class UserRequests(Base):
@@ -23,3 +24,4 @@ class UserRequests(Base):
   username: Mapped[int] = mapped_column(ForeignKey("user_login.id"))
   request_url: Mapped[str] = mapped_column(String(150))
   response_description: Mapped[str] = mapped_column(String(150)) 
+

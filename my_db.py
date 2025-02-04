@@ -1,22 +1,29 @@
-from sqlalchemy import create_engine, String, Integer, Float, Boolean, ForeignKey, text
 from sqlalchemy.orm import Session
-from datetime import date, time, datetime
+from sqlalchemy import select
+from datetime import datetime
 from models import UserLogin
+from main import engine
+from passlib.context import CryptContext
 
 
-engine = create_engine("sqlite:///context_db.db", echo=True)
 
+def get_password_hash(password):
+    return pwd_context.hash(password)
 
-with engine.connect() as conn:
-  result = conn.execute(text("SELECT * FROM user_login;"))
-  print(result.all())
-
-
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 with Session(engine) as session:
-  year_month_day = str(datetime.date(datetime.now()))
-  user = UserLogin(id=1, date=year_month_day, time=str(datetime.time(datetime.now())), username="Svajunas", password="koncius")
-  session.add(user)
-  session.commit()
+  # year_month_day = str(datetime.date(datetime.now()))
+  # user = UserLogin(id=2, date=year_month_day, time=str(datetime.time(datetime.now())), username="Titas", password=get_password_hash("koncius"), disabled=False)
+  # session.add(user)
+  # session.commit()
+
+  users = select(UserLogin)
+  for user in session.scalars(users):
+    print(user.username, user.password)
+
+
+
+
 
 
 
