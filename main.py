@@ -5,9 +5,9 @@ from context_manager import RemoveNonUnicodeCharacters
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi import Depends, FastAPI, HTTPException, status
 from typing import Annotated
-from sqlalchemy import create_engine, text, select
+from sqlalchemy import text, select
 from sqlalchemy.orm import Session
-from models import UserLogin
+from models import UserLogin, engine
 from passlib.context import CryptContext
 from datetime import datetime, timezone, timedelta
 from jwt.exceptions import InvalidTokenError
@@ -24,7 +24,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 app = FastAPI()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-engine = create_engine("sqlite:///context_db.db", echo=True)
+
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 

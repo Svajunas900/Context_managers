@@ -1,5 +1,8 @@
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
-from sqlalchemy import String, Integer, Float, Boolean, ForeignKey, text
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy import String, Integer, Float, Boolean, ForeignKey, text, create_engine
+
+
+engine = create_engine("sqlite:///context_db.db", echo=True)
 
 
 class Base(DeclarativeBase):
@@ -25,3 +28,5 @@ class UserRequests(Base):
   request_url: Mapped[str] = mapped_column(String(150))
   response_description: Mapped[str] = mapped_column(String(150)) 
 
+
+Base.metadata.create_all(engine)
