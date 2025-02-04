@@ -1,5 +1,16 @@
 # How to use it
 ## Locally
+### Step 1.
+Go to your folder in command line
+Clone repository <br>
+`git clone https://github.com/Svajunas900/Context_managers.git`
+### Step 2.
+Install all required dependencies
+`pip install -r requirements.txt`
+### Step 3.
+Launch app
+Use this command to launch app <br>
+`fastapi run main.py`
 ## Using Docker
 ### Step 1.
 Go to your folder in command line
