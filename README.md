@@ -5,7 +5,7 @@ Go to your folder in command line
 Clone repository <br>
 `git clone https://github.com/Svajunas900/Context_managers.git`
 ### Step 2.
-Install all required dependencies
+Install all required dependencies <br>
 `pip install -r requirements.txt`
 ### Step 3.
 Launch app
